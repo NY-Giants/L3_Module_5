@@ -23,33 +23,22 @@ public class TestMatchingBrackets {
 	private boolean doBracketsMatch(String b) {
 		Stack<Character> bracketmatch = new Stack<Character>();
 		for (int i = 0; i < b.length(); i++) {
-			bracketmatch.push(b.charAt(i));
-		}
-		int openCount = 0;
-		int closeCount = 0;
-		int size = bracketmatch.size();
-		System.out.println(size);
-		for (int j = 0; j < size; j++) {
-			Character poppedcharacters = bracketmatch.pop();
-			if (poppedcharacters.equals('{')) {
-				openCount++;
-				System.out.println("open"+openCount);
-			}
+			char c = b.charAt(i);
+			if (c == '{') {
+				bracketmatch.push(b.charAt(i));
 
-			else if (poppedcharacters.equals('}')) {
-				closeCount++;
-				System.out.println("close"+closeCount);
+			} else {
+				if (bracketmatch.isEmpty()) {
+					return false;
+				}
+				bracketmatch.pop();
+
 			}
+			
 		}
-		if (openCount == closeCount) {
-			System.out.println("true");
+		if(bracketmatch.isEmpty()) {
 			return true;
-
-		} else {
-			System.out.println("false");
-			return false;
 		}
-
+		return false;
 	}
-
 }
